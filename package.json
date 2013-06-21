@@ -1,0 +1,42 @@
+{
+  "name": "grunt-geo",
+  "description": "Find the geographic center of a git repo",
+  "version": "0.1.0",
+  "homepage": "https://github.com/chelm/grunt-geo",
+  "author": {
+    "name": "chelm",
+    "email": "christopher_helm@esri.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/chelm/grunt-geo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chelm/grunt-geo/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/chelm/grunt-geo/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "grunt": "~0.4.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
