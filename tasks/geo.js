@@ -8,20 +8,30 @@
 
 'use strict';
 
+
 module.exports = function(grunt) {
 
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
-  grunt.registerMultiTask('geo', 'Your task description goes here.', function() {
+  grunt.registerMultiTask('geo', 'This task will create a geojson file from the contribotr locations of a git repo', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      punctuation: '.',
-      separator: ', '
+      file: 'contributors.json'
     });
 
+    console.log('OPTIONS', options);
+    //grunt.log.writeln('File created.');
+
+    //if (!this.options.repo){
+    //  grunt.file.exists(filepath)
+    //}
+
+    var pkg = grunt.file.readJSON('package.json');
+    console.log(pkg.homepage.replace('\/\/', '\/\/api.'));
+
     // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
+    /*this.files.forEach(function(f) {
       // Concat specified files.
       var src = f.src.filter(function(filepath) {
         // Warn on and remove invalid source files (if nonull was set).
@@ -44,7 +54,7 @@ module.exports = function(grunt) {
 
       // Print a success message.
       grunt.log.writeln('File "' + f.dest + '" created.');
-    });
+    });*/
   });
 
 };
