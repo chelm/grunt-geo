@@ -11,8 +11,7 @@
 
 module.exports = function(grunt) {
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
+  var async = require('async');
 
   grunt.registerMultiTask('geo', 'This task will create a geojson file from the contribotr locations of a git repo', function() {
     // Merge task-specific and/or target-specific options with these defaults.
