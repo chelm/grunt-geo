@@ -11,7 +11,8 @@
 
 module.exports = function(grunt) {
 
-  var async = require('async');
+  var async = require('async'),
+    request = require('request');
 
   grunt.registerMultiTask('geo', 'This task will create a geojson file from the contribotr locations of a git repo', function() {
     // Merge task-specific and/or target-specific options with these defaults.
@@ -28,6 +29,10 @@ module.exports = function(grunt) {
 
     var pkg = grunt.file.readJSON('package.json');
     console.log(pkg.homepage.replace('\/\/', '\/\/api.'));
+
+    request.get('https://api.github.com/repos/d3/d3-parsets/collaborators', function( res ){
+      console.log( res );
+    });
 
     // Iterate over all specified file groups.
     /*this.files.forEach(function(f) {
