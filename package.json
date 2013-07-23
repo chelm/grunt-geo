@@ -1,7 +1,7 @@
 {
   "name": "grunt-geo",
   "description": "Find the geographic center of a git repo",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/chelm/grunt-geo",
   "author": {
     "name": "chelm",

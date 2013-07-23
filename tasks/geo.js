@@ -38,7 +38,7 @@ module.exports = function(grunt) {
           points.push( result.latLng );
           callback();      
         } else {
-          reqs--;
+          --reqs;
         }
       });
     };
@@ -87,10 +87,12 @@ module.exports = function(grunt) {
         center(function(){
           if (centerPoint){
             createLines(function(){
+              console.log('\t Saving file: ', options.file); 
               grunt.file.write( options.file, createGeoJson(points) );
               done();
             });
-          } else { 
+          } else {
+            console.log('\t Saving file: ', options.file); 
             grunt.file.write( options.file, createGeoJson(points) );
             done();
         }
