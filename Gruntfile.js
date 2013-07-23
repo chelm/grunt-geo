@@ -32,9 +32,9 @@ module.exports = function(grunt) {
     geo: {
       collaborators: {
         options: {
-          type: 'contributors',
-          file: 'contributors.geojson',
-          token: '213860c3f1225507dbae1bec25ec709eae4c5f77',
+          type: 'contributors', //'forks'
+          file: 'contributors.geojson', //'forks.geojson'
+          //token: 'a token from github',
           repo: 'https://api.github.com/repos/Leaflet/Leaflet'
           //repo: 'https://api.github.com/repos/chelm/grunt-geo'
           //repo: 'https://api.github.com/repos/d3/d3-parsets'
