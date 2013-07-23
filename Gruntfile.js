@@ -30,8 +30,9 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     geo: {
-      contributors: {
-        file: 'contributors.geojson'
+      collaborators: {
+        file: 'collaborators.geojson',
+        repo: 'https://github.com/d3/d3-parsets'
       }
     },
 
