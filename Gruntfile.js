@@ -31,9 +31,7 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     geo: {
       contributors: {
-        connect: true,
-        file: 'contributors.geojson'
-        //repo: 'url to git repo'
+        file: 'repo-contributors.geojson'
       }
     },
 

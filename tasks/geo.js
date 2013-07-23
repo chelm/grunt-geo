@@ -12,53 +12,74 @@
 module.exports = function(grunt) {
 
   var async = require('async'),
+    mq = require('mapquest'),
     request = require('request');
 
-  grunt.registerMultiTask('geo', 'This task will create a geojson file from the contribotr locations of a git repo', function() {
-    // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      file: 'contributors.json'
-    });
+  grunt.registerMultiTask('geo', 'Creates a geojson file from the contributor locations in a repo', function() {
+    var done = this.async();    
+    var options, reqs = 0, processed = 0, points = [];
 
-    console.log('OPTIONS', options);
-    //grunt.log.writeln('File created.');
+    var geocode = function( loc, user, callback ){
+      mq.geocode( loc, function(err, result) { 
+        result.latLng.user = user;
+        points.push( result.latLng );
+        callback();      
+      });
+    };
 
-    //if (!this.options.repo){
-    //  grunt.file.exists(filepath)
-    //}
+    var process = function(){
+      processed++;
+      if ( processed === reqs ){
+        grunt.file.write( options.file, createGeoJson(points) );
+        done();
+      }
+    };
+
+    var createGeoJson = function( pnts ){
+      var geojson = { type: 'FeatureCollection', features: []};
+      pnts.forEach(function(p){
+        geojson.features.push({
+          properties: {user: p.user },
+          geometry: {
+            type: 'Point',
+            coordinates: [p.lng, p.lat]
+          }
+        });
+      });
+
+      return JSON.stringify( geojson );
+    };
+
+    if ( !this.options.file ){ 
+      options = this.options({
+        file: 'contributors.json'
+      });
+    }
 
     var pkg = grunt.file.readJSON('package.json');
-    console.log(pkg.homepage.replace('\/\/', '\/\/api.'));
+    if ( !options.repo ){
+      options.repo = pkg.homepage.replace('\/\/github.com', '\/\/api.github.com/repos');
+    }
 
-    request.get('https://api.github.com/repos/d3/d3-parsets/collaborators', function( res ){
-      console.log( res );
+    console.log('OPTIONS', options);
+
+    request.get( options.repo, function( err, res, body ){
+      var repoJson = JSON.parse( body );
+      request.get( repoJson.owner.url, function(e, r, b){
+        var loc = JSON.parse( b ).location;
+        if (loc) {
+          reqs++;
+          geocode( loc, repoJson.owner.login, function(){
+            processed++;
+            if ( processed === reqs ){
+              grunt.file.write( options.file, createGeoJson(points) );
+              done();
+            }
+          });
+        }
+      });
     });
 
-    // Iterate over all specified file groups.
-    /*this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
-        }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
-
-      // Handle options.
-      src += options.punctuation;
-
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
-
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
-    });*/
   });
 
 };
