@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[{"properties":{"user":"chelm"},"geometry":{"type":"Point","coordinates":[-105.998564,38.528599]}}]}
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"user":"chelm"},"geometry":{"type":"Point","coordinates":[-105.998564,38.528599]}}]}

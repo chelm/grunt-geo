@@ -39,6 +39,7 @@ module.exports = function(grunt) {
       var geojson = { type: 'FeatureCollection', features: []};
       pnts.forEach(function(p){
         geojson.features.push({
+          type: 'Feature',
           properties: {user: p.user },
           geometry: {
             type: 'Point',
