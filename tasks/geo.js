@@ -25,9 +25,10 @@ module.exports = function(grunt) {
       lines = [];
     
     var pkg = grunt.file.readJSON('package.json');
+
     options = this.options({
-      file: 'collaborators.geojson',
-      repo: pkg.homepage.replace('\/\/github.com', '\/\/api.github.com/repos')
+      file: 'collaborators.geojson'
+      //repo: pkg.homepage.replace('\/\/github.com', '\/\/api.github.com/repos')
     });
 
 
@@ -129,19 +130,23 @@ module.exports = function(grunt) {
       return JSON.stringify( geojson );
     };
 
-    console.log('\t Using repo:', options.repo);
+    if ( !options.repo ){ 
+      console.log('\t Can\'t find a repo to use. Please a repo to the task options.');
+    } else {
+      console.log('\t Using repo:', options.repo );
 
-    request.get( options.repo + '/collaborators'+ (( options.token ) ? '?access_token='+options.token : ''), function( err, res, body ){
-      var contribs = JSON.parse( body );
-      contribs.forEach(function( c ){
-        request.get( c.url + (( options.token ) ? '?access_token='+options.token : ''), function(e, r, b){
-          var user = JSON.parse( b );
-          if (user.location) {
-            geocode( user.location, c.login, process);
-          }
+      request.get( options.repo + '/collaborators'+ (( options.token ) ? '?access_token='+options.token : ''), function( err, res, body ){
+        var contribs = JSON.parse( body );
+        contribs.forEach(function( c ){
+          request.get( c.url + (( options.token ) ? '?access_token='+options.token : ''), function(e, r, b){
+            var user = JSON.parse( b );
+            if (user.location) {
+              geocode( user.location, c.login, process);
+            }
+          });
         });
       });
-    });
+    }
 
   });
 
