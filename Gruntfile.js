@@ -31,8 +31,11 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     geo: {
       collaborators: {
-        file: 'collaborators.geojson',
-        repo: 'https://github.com/d3/d3-parsets'
+        options: {
+          file: 'collaborators.geojson',
+          token: 'cc5a0b92bb9a728644306468a67312f3840a19c0'
+          //repo: 'https://api.github.com/repos/twitter/bootstrap'
+        }
       }
     },
 
