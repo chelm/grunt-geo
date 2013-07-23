@@ -32,13 +32,14 @@ module.exports = function(grunt) {
 
 
     var geocode = function( loc, user, callback ){
+      reqs++;
       mq.geocode( loc, function(err, result) { 
         if ( result && result.latLng ){ 
           result.latLng.user = user;
           points.push( result.latLng );
           callback();      
         } else {
-          --reqs;
+          callback();      
         }
       });
     };
@@ -136,7 +137,6 @@ module.exports = function(grunt) {
         request.get( c.url + (( options.token ) ? '?access_token='+options.token : ''), function(e, r, b){
           var user = JSON.parse( b );
           if (user.location) {
-            reqs++;
             geocode( user.location, c.login, process);
           }
         });
