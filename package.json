@@ -37,6 +37,11 @@
     "mapquest": "*",
     "arc": "0.0.2"   
   },
+  "dependencies":{
+    "request": "*",
+    "mapquest": "*",
+    "arc": "0.0.2"
+  },
   "peerDependencies": {
     "grunt": "~0.4.1"
   },
