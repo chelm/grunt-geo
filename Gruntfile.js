@@ -33,7 +33,7 @@ module.exports = function(grunt) {
       collaborators: {
         options: {
           file: 'collaborators.geojson',
-          token: '213860c3f1225507dbae1bec25ec709eae4c5f77',
+          //token: 'a token from github'
           type: "collaborators", //forks
           //repo: 'https://api.github.com/repos/d3/d3-parsets'
           repo: 'https://api.github.com/repos/jashkenas/backbone'
