@@ -31,7 +31,7 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     geo: {
       contributors: {
-        file: 'repo-contributors.geojson'
+        file: 'contributors.geojson'
       }
     },
 

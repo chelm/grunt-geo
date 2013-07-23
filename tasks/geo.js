@@ -52,7 +52,7 @@ module.exports = function(grunt) {
 
     if ( !this.options.file ){ 
       options = this.options({
-        file: 'contributors.json'
+        file: 'contributors.geojson'
       });
     }
 
@@ -69,13 +69,7 @@ module.exports = function(grunt) {
         var loc = JSON.parse( b ).location;
         if (loc) {
           reqs++;
-          geocode( loc, repoJson.owner.login, function(){
-            processed++;
-            if ( processed === reqs ){
-              grunt.file.write( options.file, createGeoJson(points) );
-              done();
-            }
-          });
+          geocode( loc, repoJson.owner.login, process);
         }
       });
     });
