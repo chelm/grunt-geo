@@ -32,9 +32,11 @@ module.exports = function(grunt) {
     geo: {
       collaborators: {
         options: {
-          file: 'collaborators.geojson',
-          token: 'cc5a0b92bb9a728644306468a67312f3840a19c0'
-          //repo: 'https://api.github.com/repos/twitter/bootstrap'
+          file: 'collaborators.geojson'
+          //token: 'a token from github'
+          //repo: 'https://api.github.com/repos/twitter/bootstrap',
+          //repo: 'https://api.github.com/repos/d3/d3-parsets',
+          //repo: 'https://api.github.com/repos/jashkenas/backbone'
         }
       }
     },
