@@ -75,7 +75,7 @@ module.exports = function(grunt) {
           var start = new arc.Coord( p.lng, p.lat );
           var end = new arc.Coord( centerPoint.lng, centerPoint.lat );
           var gc = new arc.GreatCircle( start, end, { 'marker-color': '#555555'} );
-          var line = gc.Arc(10);
+          var line = gc.Arc(20);
           lines.push(line.json());
         }
       });
