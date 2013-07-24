@@ -35,9 +35,9 @@
     "async": "*",
     "request": "*",
     "mapquest": "*",
-    "arc": "0.0.2"   
+    "arc": "0.0.2"
   },
-  "dependencies":{
+  "dependencies": {
     "request": "*",
     "mapquest": "*",
     "arc": "0.0.2"

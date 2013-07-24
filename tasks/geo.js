@@ -139,7 +139,8 @@ module.exports = function(grunt) {
       request.get( options.repo + '/' + options.type + (( options.token ) ? '?access_token='+options.token : ''), function( err, res, body ){
         var contribs = JSON.parse( body );
         contribs.forEach(function( c ){
-          request.get( c.url + (( options.token ) ? '?access_token='+options.token : ''), function(e, r, b){
+          var url = ( options.type === "forks" ) ? c.owner.url : c.url;
+          request.get( url + (( options.token ) ? '?access_token='+options.token : ''), function(e, r, b){
             var user = JSON.parse( b );
             if (user.location) {
               geocode( user.location, c.login, process);
