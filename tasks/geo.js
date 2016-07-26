@@ -136,11 +136,21 @@ module.exports = function(grunt) {
     } else {
       console.log('\t Using repo:',  options.repo + '/' + options.type);
 
-      request.get( options.repo + '/' + options.type + (( options.token ) ? '?access_token='+options.token : ''), function( err, res, body ){
+      request.get({
+        url:  options.repo + '/' + options.type + (( options.token ) ? '?access_token='+options.token : ''),
+        headers: {
+          'User-Agent': 'grunt-geo'
+        }
+      }, function( err, res, body ){
         var contribs = JSON.parse( body );
         contribs.forEach(function( c ){
           var url = ( options.type === "forks" ) ? c.owner.url : c.url;
-          request.get( url + (( options.token ) ? '?access_token='+options.token : ''), function(e, r, b){
+          request.get({
+            url:c.url + (( options.token ) ? '?access_token='+options.token : ''),
+            headers: {
+              'User-Agent': 'grunt-geo'
+            }
+          }, function(e, r, b){
             var user = JSON.parse( b );
             if (user.location) {
               geocode( user.location, c.login, process);
